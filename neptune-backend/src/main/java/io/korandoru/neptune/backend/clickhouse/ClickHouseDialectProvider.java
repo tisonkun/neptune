@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.korandoru.neptune.backend;
+package io.korandoru.neptune.backend.clickhouse;
 
 import java.sql.Connection;
 import java.sql.SQLException;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package io.korandoru.neptune.backend;
+package io.korandoru.neptune.backend.clickhouse;
 
 import org.springframework.data.relational.core.dialect.AnsiDialect;
 import org.springframework.data.relational.core.dialect.LimitClause;

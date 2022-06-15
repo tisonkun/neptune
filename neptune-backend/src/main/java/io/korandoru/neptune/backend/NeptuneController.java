@@ -16,11 +16,10 @@
 
 package io.korandoru.neptune.backend;
 
+import io.korandoru.neptune.backend.query.StargazersCrossQuery;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -28,35 +27,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class NeptuneController {
 
-    private final NamedParameterJdbcTemplate jdbc;
+    private final StargazersCrossQuery stargazersCrossQuery;
 
     @Autowired
-    public NeptuneController(NamedParameterJdbcTemplate jdbc) {
-        this.jdbc = jdbc;
+    public NeptuneController(StargazersCrossQuery stargazersCrossQuery) {
+        this.stargazersCrossQuery = stargazersCrossQuery;
     }
 
     @PostConstruct
     public void construct() {
         System.out.println("construct");
 
-        final var parameters = new MapSqlParameterSource();
-        parameters.addValue("existence", List.of("apache/pulsar", "apache/kafka"));
+        final var result = stargazersCrossQuery.doQuery(List.of("apache/pulsar", "apache/kafka"));
 
-        final var result = this.jdbc.queryForList("""
-    SELECT
-        repo_name,
-        count() AS stars
-    FROM github_events
-    WHERE (event_type = 'WatchEvent') AND (actor_login IN
-    (
-        SELECT actor_login
-        FROM github_events
-        WHERE (event_type = 'WatchEvent') AND (repo_name IN (:existence))
-    )) AND (repo_name NOT IN (:existence))
-    GROUP BY repo_name
-    ORDER BY stars DESC
-    LIMIT 50
-""", parameters);
         System.out.println(result);
     }
 

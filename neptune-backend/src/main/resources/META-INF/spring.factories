@@ -1,1 +1,1 @@
-org.springframework.data.jdbc.repository.config.DialectResolver$JdbcDialectProvider=io.korandoru.neptune.backend.ClickHouseDialectProvider
+org.springframework.data.jdbc.repository.config.DialectResolver$JdbcDialectProvider=io.korandoru.neptune.backend.clickhouse.ClickHouseDialectProvider
