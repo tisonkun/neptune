@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 @Configuration
@@ -31,14 +32,14 @@ public class NeptuneContext {
     public DataSource dataSource() {
         final var dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.clickhouse.jdbc.ClickHouseDriver");
-        dataSource.setUrl("jdbc:ch://play.clickhouse.com:443");
+        dataSource.setUrl("jdbc:ch://play.clickhouse.com:443?ssl=true");
         dataSource.setUsername("explorer");
         return dataSource;
     }
 
     @Bean
-    public JdbcTemplate jdbcTemplate(DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
+    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource dataSource) {
+        return new NamedParameterJdbcTemplate(dataSource);
     }
 
 }
