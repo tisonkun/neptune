@@ -19,8 +19,6 @@ package io.korandoru.neptune.backend;
 import io.korandoru.neptune.backend.query.StargazersCrossQuery;
 import io.korandoru.neptune.backend.query.StargazersCrossRequest;
 import io.korandoru.neptune.backend.query.StargazersCrossResult;
-import jakarta.annotation.PostConstruct;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
