@@ -17,10 +17,14 @@
 package io.korandoru.neptune.backend;
 
 import io.korandoru.neptune.backend.query.StargazersCrossQuery;
+import io.korandoru.neptune.backend.query.StargazersCrossRequest;
+import io.korandoru.neptune.backend.query.StargazersCrossResult;
 import jakarta.annotation.PostConstruct;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -34,13 +38,10 @@ public class NeptuneController {
         this.stargazersCrossQuery = stargazersCrossQuery;
     }
 
-    @PostConstruct
-    public void construct() {
-        System.out.println("construct");
-
-        final var result = stargazersCrossQuery.doQuery(List.of("apache/pulsar", "apache/kafka"));
-
-        System.out.println(result);
+    @RequestMapping("/stargazers_cross")
+    @ResponseBody
+    public StargazersCrossResult stargazersCross(@RequestBody StargazersCrossRequest request) {
+        return this.stargazersCrossQuery.doQuery(request.origins());
     }
 
 }
