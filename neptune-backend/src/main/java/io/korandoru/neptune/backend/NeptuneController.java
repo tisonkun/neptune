@@ -16,9 +16,9 @@
 
 package io.korandoru.neptune.backend;
 
-import io.korandoru.neptune.backend.query.StargazersCrossQuery;
-import io.korandoru.neptune.backend.query.StargazersCrossRequest;
-import io.korandoru.neptune.backend.query.StargazersCrossResult;
+import io.korandoru.neptune.backend.query.AffinityFamousQuery;
+import io.korandoru.neptune.backend.query.AffinityFamousRequest;
+import io.korandoru.neptune.backend.query.AffinityFamousResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,17 +29,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class NeptuneController {
 
-    private final StargazersCrossQuery stargazersCrossQuery;
+    private final AffinityFamousQuery affinityFamousQuery;
 
     @Autowired
-    public NeptuneController(StargazersCrossQuery stargazersCrossQuery) {
-        this.stargazersCrossQuery = stargazersCrossQuery;
+    public NeptuneController(AffinityFamousQuery affinityFamousQuery) {
+        this.affinityFamousQuery = affinityFamousQuery;
     }
 
-    @RequestMapping("/stargazers_cross")
+    @RequestMapping("/affinity/famous")
     @ResponseBody
-    public StargazersCrossResult stargazersCross(@RequestBody StargazersCrossRequest request) {
-        return this.stargazersCrossQuery.doQuery(request.origins());
+    public AffinityFamousResult affinityFamous(@RequestBody AffinityFamousRequest request) {
+        return this.affinityFamousQuery.doQuery(request.origins());
     }
 
 }

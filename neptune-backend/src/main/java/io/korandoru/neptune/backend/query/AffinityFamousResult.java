@@ -18,5 +18,7 @@ package io.korandoru.neptune.backend.query;
 
 import java.util.List;
 
-public record StargazersCrossRequest(List<String> origins) {
+public record AffinityFamousResult(List<String> origins, List<Item> crosses) {
+    public record Item(String repoName, long stars) {
+    }
 }

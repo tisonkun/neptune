@@ -26,16 +26,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
-public class StargazersCrossQuery {
+public class AffinityFamousQuery {
 
     private final NamedParameterJdbcTemplate jdbc;
 
     @Autowired
-    public StargazersCrossQuery(NamedParameterJdbcTemplate jdbc) {
+    public AffinityFamousQuery(NamedParameterJdbcTemplate jdbc) {
         this.jdbc = jdbc;
     }
 
-    public StargazersCrossResult doQuery(List<String> origins) {
+    public AffinityFamousResult doQuery(List<String> origins) {
         log.debug("StargazersCrossQuery.doQuery with origins: {}", origins);
 
         final var parameters = new MapSqlParameterSource();
@@ -57,11 +57,11 @@ public class StargazersCrossQuery {
                 LIMIT 50
             """, parameters);
 
-        final var crosses = new ArrayList<StargazersCrossResult.Item>();
+        final var crosses = new ArrayList<AffinityFamousResult.Item>();
         for (var item : result) {
-            crosses.add(new StargazersCrossResult.Item((String) item.get("repo_name"), (Long) item.get("stars")));
+            crosses.add(new AffinityFamousResult.Item((String) item.get("repo_name"), (Long) item.get("stars")));
         }
-        return new StargazersCrossResult(origins, crosses);
+        return new AffinityFamousResult(origins, crosses);
     }
 
 }

@@ -14,5 +14,5 @@ cd neptune-backend
 2. Query stargazers cross:
 
 ```shell
-curl -H "Content-Type: application/json" -X GET http://127.0.0.1:8080/api/stargazers_cross -d '{"origins": ["apache/pulsar", "apache/kafka"]}' | jq
+curl -H "Content-Type: application/json" -X GET http://127.0.0.1:8080/api/affinity/famous -d '{"origins": ["apache/pulsar", "apache/kafka"]}' | jq
 ```
