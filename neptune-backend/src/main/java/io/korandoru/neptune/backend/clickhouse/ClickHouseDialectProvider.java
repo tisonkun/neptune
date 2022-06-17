@@ -35,7 +35,7 @@ public class ClickHouseDialectProvider implements DialectResolver.JdbcDialectPro
         final var meta = connection.getMetaData();
         final var name = meta.getDatabaseProductName().toLowerCase(Locale.ENGLISH);
         if (name.contains("clickhouse")) {
-            return ClickhouseDialect.INSTANCE;
+            return ClickHouseDialect.INSTANCE;
         }
         return null;
     }

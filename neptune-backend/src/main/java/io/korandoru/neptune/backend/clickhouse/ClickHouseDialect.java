@@ -19,9 +19,9 @@ package io.korandoru.neptune.backend.clickhouse;
 import org.springframework.data.relational.core.dialect.AnsiDialect;
 import org.springframework.data.relational.core.dialect.LimitClause;
 
-public class ClickhouseDialect extends AnsiDialect {
+public class ClickHouseDialect extends AnsiDialect {
 
-    public static final ClickhouseDialect INSTANCE = new ClickhouseDialect();
+    public static final ClickHouseDialect INSTANCE = new ClickHouseDialect();
 
     @Override
     public LimitClause limit() {
@@ -48,7 +48,7 @@ public class ClickhouseDialect extends AnsiDialect {
         };
     }
 
-    private ClickhouseDialect() {
+    private ClickHouseDialect() {
         // singleton
     }
 
