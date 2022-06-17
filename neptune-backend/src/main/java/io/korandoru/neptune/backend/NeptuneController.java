@@ -17,8 +17,10 @@
 package io.korandoru.neptune.backend;
 
 import io.korandoru.neptune.backend.query.AffinityFamousQuery;
-import io.korandoru.neptune.backend.query.AffinityFamousRequest;
 import io.korandoru.neptune.backend.query.AffinityFamousResult;
+import io.korandoru.neptune.backend.query.AffinityRatioQuery;
+import io.korandoru.neptune.backend.query.AffinityRatioResult;
+import io.korandoru.neptune.backend.query.RepositoriesRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,16 +32,27 @@ import org.springframework.web.bind.annotation.RestController;
 public class NeptuneController {
 
     private final AffinityFamousQuery affinityFamousQuery;
+    private final AffinityRatioQuery affinityRatioQuery;
 
     @Autowired
-    public NeptuneController(AffinityFamousQuery affinityFamousQuery) {
+    public NeptuneController(
+        AffinityFamousQuery affinityFamousQuery,
+        AffinityRatioQuery affinityRatioQuery
+    ) {
         this.affinityFamousQuery = affinityFamousQuery;
+        this.affinityRatioQuery = affinityRatioQuery;
     }
 
     @RequestMapping("/affinity/famous")
     @ResponseBody
-    public AffinityFamousResult affinityFamous(@RequestBody AffinityFamousRequest request) {
+    public AffinityFamousResult affinityFamous(@RequestBody RepositoriesRequest request) {
         return this.affinityFamousQuery.doQuery(request.origins());
+    }
+
+    @RequestMapping("/affinity/ratio")
+    @ResponseBody
+    public AffinityRatioResult affinityRatio(@RequestBody RepositoriesRequest request) {
+        return this.affinityRatioQuery.doQuery(request.origins());
     }
 
 }
