@@ -35,19 +35,3 @@ jobs:
       - uses: apache/skywalking-eyes/header@main
         with:
           config: tools/ci/licenserc.yml
-
-  unittest:
-    if: (github.event_name != 'schedule') || (github.repository == 'korandoru/neptune')
-    name: Run unit tests
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v3
-      - name: Setup Java
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-      - name: Gradle test
-        working-directory: neptune-backend
-        run: ./gradlew spotlessCheck test
